@@ -8,6 +8,9 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ActivityIndicator,
+  Alert,
+  Linking,
 } from 'react-native';
 import api from './services/api';
 import {MyIcon} from './fragments/MyIcon';
@@ -21,14 +24,21 @@ interface IRepository {
 const App = () => {
   const [username, setUsername] = useState('');
   const [repositories, setRepositories] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const findRepositories = async () => {
-    try {
-      const response = await api.get(`${username}/repos`);
-      setRepositories(response.data);
-    } catch (error) {
-      console.log(error);
-    } finally {
+    if (username == '') {
+      Alert.alert('Type a username!');
+    } else {
+      setLoading(true);
+      try {
+        const response = await api.get(`${username}/repos`);
+        setRepositories(response.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -38,9 +48,10 @@ const App = () => {
     },
   );
 
+
+
   return (
     <SafeAreaView style={styles.containerApp}>
-      {/* <Text style={styles.title}>Git Search</Text> */}
       <Image source={require('../assets/images/3.png')} />
       <Text style={styles.instruction}>
         Find a Github user's public repositories
@@ -53,25 +64,45 @@ const App = () => {
         onChangeText={setUsername}
       />
       <TouchableOpacity style={styles.btn} onPress={findRepositories}>
-        <Text style={styles.textBtn}>Search</Text>
+        {loading ? (
+          <ActivityIndicator color="#FFFFFF" />
+        ) : (
+          <Text style={styles.textBtn}>Search</Text>
+        )}
       </TouchableOpacity>
       <FlatList
         style={styles.repositoryList}
         data={filteredInfos}
         renderItem={({item}) => (
           <View key={item.id} style={styles.repositoryCard}>
-            <Text style={styles.repositoryTitle}>{item.name}</Text>
+            {item.name.length > 25 ? (
+              <Text style={styles.repositoryTitle}>{`${item.name.substring(
+                0,
+                25,
+              )}...`}</Text>
+            ) : (
+              <Text style={styles.repositoryTitle}>{item.name}</Text>
+            )}
             <MyIcon
               name="github"
               size={30}
               color="#ED145B"
               onPress={() => {
-                console.log('clicou');
+                Linking.openURL(item.html_url);
               }}
             />
           </View>
         )}
       />
+      {repositories.length > 0 ? (
+        <TouchableOpacity
+          style={styles.floatBtn}
+          onPress={() => {
+            setRepositories([]), setUsername('');
+          }}>
+          <MyIcon name="bin" size={30} color="#ED145B" />
+        </TouchableOpacity>
+      ) : null}
     </SafeAreaView>
   );
 };
@@ -82,10 +113,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#2C2C2C',
     alignItems: 'center',
     padding: 16,
-  },
-  title: {
-    color: '#ED145B',
-    fontSize: 35,
   },
   instruction: {
     fontSize: 18,
@@ -117,6 +144,7 @@ const styles = StyleSheet.create({
   },
   repositoryList: {
     width: '100%',
+    marginTop: 16,
   },
   repositoryCard: {
     width: '100%',
@@ -133,9 +161,19 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
   },
+  floatBtn: {
+    width: 80,
+    height: 80,
+    borderRadius: 100,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    // marginTop: 16
+    position: 'absolute',
+    bottom: 16,
+    right: 16,
+  },
 });
 
 export default App;
-
-// Aternative backgroundColor
-// #161616
