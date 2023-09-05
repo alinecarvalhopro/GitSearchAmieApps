@@ -1,6 +1,7 @@
-import React, {MutableRefObject, ObjectHTMLAttributes, useState} from 'react';
+import React, {useState} from 'react';
 import {
   FlatList,
+  Image,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -9,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import api from './services/api';
+import {MyIcon} from './fragments/MyIcon';
 
 interface IRepository {
   id: string;
@@ -38,7 +40,8 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.containerApp}>
-      <Text style={styles.title}>Git Search</Text>
+      {/* <Text style={styles.title}>Git Search</Text> */}
+      <Image source={require('../assets/images/3.png')} />
       <Text style={styles.instruction}>
         Find a Github user's public repositories
       </Text>
@@ -53,10 +56,19 @@ const App = () => {
         <Text style={styles.textBtn}>Search</Text>
       </TouchableOpacity>
       <FlatList
+        style={styles.repositoryList}
         data={filteredInfos}
         renderItem={({item}) => (
-          <View key={item.id}>
-            <Text>{item.name}</Text>
+          <View key={item.id} style={styles.repositoryCard}>
+            <Text style={styles.repositoryTitle}>{item.name}</Text>
+            <MyIcon
+              name="github"
+              size={30}
+              color="#ED145B"
+              onPress={() => {
+                console.log('clicou');
+              }}
+            />
           </View>
         )}
       />
@@ -73,7 +85,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#ED145B',
-    fontSize: 30,
+    fontSize: 35,
   },
   instruction: {
     fontSize: 18,
@@ -103,10 +115,27 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
   },
-  cardRepository: {
+  repositoryList: {
     width: '100%',
-    height: 50,
+  },
+  repositoryCard: {
+    width: '100%',
+    padding: 16,
+    borderRadius: 5,
+    borderColor: '#ED145B',
+    borderWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  repositoryTitle: {
+    color: '#FFFFFF',
+    fontSize: 18,
   },
 });
 
 export default App;
+
+// Aternative backgroundColor
+// #161616
