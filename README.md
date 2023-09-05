@@ -1,3 +1,15 @@
+## Git Search 🔍
+
+Esse é um projeto pessoal de um App onde é possível buscar os repositórios públicos de um usuário do Github, digitando o username. Também é possível limpar a pesquisa utilizando o botão flutuando que é renderizado quando há um resultado de pesquisa em tela, além de oferecer respostas ao usuário, tornando a utilização bem intuitiva.
+
+O App foi desenvolvido em React Native. Também fiz uso da biblioteca Axios para realizar as requisições.
+
+![Captura de tela 2023-09-05 183740](https://github.com/alinecarvalhopro/GitSearchAmieApps/assets/118927052/a5b53122-97d0-4ac8-b24d-d8ff8ef1e7de)
+![Captura de tela 2023-09-05 183828](https://github.com/alinecarvalhopro/GitSearchAmieApps/assets/118927052/a863e694-3722-400e-8626-c786282612cb)
+
+
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
