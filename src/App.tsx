@@ -25,6 +25,7 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<string | undefined>();
 
   const findRepositories = async () => {
     if (username == '') {
@@ -34,10 +35,12 @@ const App = () => {
       try {
         const response = await api.get(`${username}/repos`);
         setRepositories(response.data);
+        setResult(username);
       } catch (error) {
         console.log(error);
       } finally {
         setLoading(false);
+        setUsername('');
       }
     }
   };
@@ -48,11 +51,9 @@ const App = () => {
     },
   );
 
-
-
   return (
     <SafeAreaView style={styles.containerApp}>
-      <Image source={require('../assets/images/3.png')} />
+      <Image source={require('../assets/images/logo.png')} />
       <Text style={styles.instruction}>
         Find a Github user's public repositories
       </Text>
@@ -70,6 +71,9 @@ const App = () => {
           <Text style={styles.textBtn}>Search</Text>
         )}
       </TouchableOpacity>
+      {result ? (
+        <Text style={styles.searchResult}>Result for "{result}"</Text>
+      ) : null}
       <FlatList
         style={styles.repositoryList}
         data={filteredInfos}
@@ -98,7 +102,7 @@ const App = () => {
         <TouchableOpacity
           style={styles.floatBtn}
           onPress={() => {
-            setRepositories([]), setUsername('');
+            setRepositories([]), setResult(undefined);
           }}>
           <MyIcon name="bin" size={30} color="#ED145B" />
         </TouchableOpacity>
@@ -142,6 +146,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
   },
+  searchResult: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    marginTop: 32,
+    alignSelf: 'flex-start',
+  },
   repositoryList: {
     width: '100%',
     marginTop: 16,
@@ -169,7 +179,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',
-    // marginTop: 16
     position: 'absolute',
     bottom: 16,
     right: 16,
