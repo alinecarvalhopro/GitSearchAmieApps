@@ -29,7 +29,7 @@ const App = () => {
 
   const findRepositories = async () => {
     if (username == '') {
-      Alert.alert('Type a username!');
+      Alert.alert('Type a username');
     } else {
       setLoading(true);
       try {
@@ -38,6 +38,7 @@ const App = () => {
         setResult(username);
       } catch (error) {
         console.log(error);
+        Alert.alert('Type a valid username');
       } finally {
         setLoading(false);
         setUsername('');
@@ -71,9 +72,15 @@ const App = () => {
           <Text style={styles.textBtn}>Search</Text>
         )}
       </TouchableOpacity>
-      {result ? (
+      {repositories.length > 0 ? (
         <Text style={styles.searchResult}>Result for "{result}"</Text>
-      ) : null}
+      ) : (
+        <>
+          {result ? (
+            <Text style={styles.searchResult}>No result for "{result}"</Text>
+          ) : null}
+        </>
+      )}
       <FlatList
         style={styles.repositoryList}
         data={filteredInfos}
@@ -98,7 +105,7 @@ const App = () => {
           </View>
         )}
       />
-      {repositories.length > 0 ? (
+      {repositories.length > 0 || result ? (
         <TouchableOpacity
           style={styles.floatBtn}
           onPress={() => {
