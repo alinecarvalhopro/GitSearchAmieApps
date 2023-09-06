@@ -5,8 +5,7 @@ Esse é um projeto pessoal de um App onde é possível buscar os repositórios p
 O App foi desenvolvido em React Native. Também fiz uso da biblioteca Axios para realizar as requisições.
 
 ![Captura de tela 2023-09-05 183740](https://github.com/alinecarvalhopro/GitSearchAmieApps/assets/118927052/a5b53122-97d0-4ac8-b24d-d8ff8ef1e7de)
-![Captura de tela 2023-09-05 183828](https://github.com/alinecarvalhopro/GitSearchAmieApps/assets/118927052/a863e694-3722-400e-8626-c786282612cb)
-
+![Captura de tela 2023-09-06 143051](https://github.com/alinecarvalhopro/GitSearchAmieApps/assets/118927052/c7f9d24b-2326-40ab-a036-c1a80c9fb282)
 
 
 
