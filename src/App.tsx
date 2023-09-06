@@ -186,9 +186,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',
-    position: 'absolute',
-    bottom: 16,
-    right: 16,
+    marginTop: 16,
+    marginRight: 16,
   },
 });
 
