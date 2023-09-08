@@ -1,6 +1,8 @@
 ## Git Search 🔍
 
-Esse é um projeto pessoal de um App onde é possível buscar os repositórios públicos de um usuário do Github, digitando o username. Também é possível limpar a pesquisa utilizando o botão flutuando que é renderizado quando há um resultado de pesquisa em tela, além de oferecer respostas ao usuário, tornando a utilização bem intuitiva.
+sse é um projeto pessoal de um App onde é possível buscar os repositórios públicos de um usuário do Github, digitando o username de um usuário do Github. Caso haja repositórios, eles serão renderizados em tela e cada card possui o nome do repositório e um ícone do Github, que ao clicar, um navegador externo é aberto na página do repositório. 
+
+Também é possível limpar a pesquisa utilizando o botão de lixeira que é renderizado quando há um resultado de pesquisa em tela, além de oferecer respostas ao usuário, tornando a utilização bem intuitiva.
 
 O App foi desenvolvido em React Native. Também fiz uso da biblioteca Axios para realizar as requisições.
 
