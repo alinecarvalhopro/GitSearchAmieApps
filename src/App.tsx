@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   searchResult: {
     color: '#FFFFFF',
     fontSize: 18,
-    marginTop: 32,
+    marginTop: 24,
     alignSelf: 'flex-start',
   },
   repositoryList: {
@@ -187,7 +187,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-end',
     marginTop: 16,
-    marginRight: 16,
   },
 });
 
