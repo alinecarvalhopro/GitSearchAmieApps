@@ -11,6 +11,7 @@ import {
   ActivityIndicator,
   Alert,
   Linking,
+  Keyboard,
 } from 'react-native';
 import api from './services/api';
 import {MyIcon} from './fragments/MyIcon';
@@ -28,6 +29,7 @@ const App = () => {
   const [result, setResult] = useState<string | undefined>();
 
   const findRepositories = async () => {
+    Keyboard.dismiss();
     if (username == '') {
       Alert.alert('Type a username');
     } else {
